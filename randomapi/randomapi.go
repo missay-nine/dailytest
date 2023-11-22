@@ -78,13 +78,13 @@ func randomdata() (int, int, int) {
 	ordNumInt := int(ordNum.Int64()) + 4
 	// 根据订单数随机生成对应数量的时间值 值的类型是 0-59999 ,用一个切片接受
 	for i := 0; i < ordNumInt; i++ {
-		// 随机生成金币数 存入tmp 范围是 100-200000
-		tmp, err := rand.Int(rand.Reader, big.NewInt(199901))
+		// 随机生成金币数 存入tmp 范围是 100-200000  是100的整数倍 rand 随机生成0-1999  +1就是 1-2000 *100 就是对应 100 -200000
+		tmp, err := rand.Int(rand.Reader, big.NewInt(2000))
 		if err != nil {
 			panic(err)
 		}
 		// 将tmp 转换为int 类型
-		tmpInt := int(tmp.Int64()) + 100
+		tmpInt := (int(tmp.Int64()) + 1) * 100
 		// 将金币数存入goldsum
 		goldsum += tmpInt
 		// 随机生成时间值
