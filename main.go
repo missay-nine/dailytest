@@ -12,7 +12,7 @@ func main() {
 	// 测试一百次
 	// 统计值为小和的次数
 
-	var n int = 50000
+	var n int = 4800
 	var small, big, odd, even int
 	f, err := os.OpenFile("log.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
