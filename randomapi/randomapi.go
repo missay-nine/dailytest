@@ -51,6 +51,47 @@ func Randapi() (string, int) {
 	return result, resultInt
 }
 
+func Randomapi2(ordernum, goldsum int, timesum int) (string, int) {
+	// type pair struct {
+	// 	x string
+	// 	y int
+	// } // 一个存对应字符串 一个存对应和
+	//var log []pair
+	// timesum := randomtime(ordernum)
+	//fmt.Println(timesum)
+	ans := jiami(ordernum, goldsum, timesum)
+	//	fmt.Println(ans)
+
+	// 然后分成五段，从下标为2 取 每段取12位，将对应十位变成十进制
+	// 每段的和
+	var duanSum int64 = 0
+	for i := 0; i < 5; i++ {
+		ans1 := ans[2+12*i : 14+12*i]
+		// 将该字符串转为十进制
+		ans2, _ := strconv.ParseInt(ans1, 16, 64)
+		duanSum += ans2
+
+	}
+
+	//fmt.Println(duanSum)
+	//取duanSum 的第一个数字
+	duanSumString := strconv.FormatInt(duanSum, 10)
+	firstDigit := duanSumString[0]
+	//将firstDigit 从byte 转为int 类型
+	firstDigitInt := int(firstDigit - '0')
+
+	// 然后根据第一个数字，从第firstDigit 个数截取三位 如果第一位是0  则从第10位开始截取duansum三位 // 不可能是第10为 因为一个数不可能有前导0
+	var result string = duanSumString[firstDigitInt-1 : firstDigitInt+2]
+
+	// 然后取result 每一位的数字
+	var resultInt int = 0
+	for i := 0; i < 3; i++ {
+		resultInt += int(result[i] - '0')
+	}
+	//log = append(log, pair{ans, resultInt})
+	return result, resultInt
+}
+
 func jiami(ordNumInt int, goldsum int, timesum int) string {
 	// 用sha256 算法 将订单数和金币数和时间值之和加密
 	sha256 := sha256.New()
@@ -94,4 +135,33 @@ func randomdata() (int, int, int) {
 		timesum += tmp2Int
 	}
 	return ordNumInt, goldsum, timesum
+}
+
+func Randomtime(ordernum int) int {
+	var timesum int = 0
+	for i := 0; i < ordernum; i++ {
+		// 随机生成时间值
+		tmp2, _ := rand.Int(rand.Reader, big.NewInt(60000))
+		tmp2Int := int(tmp2.Int64())
+		// 将时间值求和
+		timesum += tmp2Int
+
+	}
+	return timesum
+}
+
+// 给定一个数组 里面包括秒数，为数组中的每个秒数随机生成0-999的毫秒值，然后秒数和毫秒拼接在一起，得到一个新的数组，
+// 比如说秒数是32 生成的毫秒数为333 那么这个数就是32333 然后将数组所有时间值求和，得到一个时间值
+func Randomtime2(a []int) int {
+	n := len(a)
+	var timesum int = 0
+	for i := 0; i < n; i++ {
+		// 随机生成时间值
+		tmp2, _ := rand.Int(rand.Reader, big.NewInt(1000))
+		tmp2Int := int(tmp2.Int64())
+		// 将时间值求和
+		timesum += a[i]*1000 + tmp2Int
+	}
+	return timesum
+
 }

@@ -5,11 +5,16 @@ import "fmt"
 func main() {
 
 	a := [10]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-	b := a[0:3]
-	fmt.Println(a, b)
-	b = append(b, 11, 12, 13)
-	fmt.Print(len(b), cap(b), "\n")
-	fmt.Println(a, b)
+	//	b := a[0:3]
+	c := a[0:9]
+	fmt.Println(len(c), cap(c))
+	//b = append(b, 11, 12, 13)
+	c = append(c, 11, 12, 13)
+	fmt.Println(len(c), cap(c))
+
+	//fmt.Println(len(c), cap(c))
+	//fmt.Print(len(b), cap(b), "\n")
+	//fmt.Println(a, b)
 }
 
 // 输出结果是：
