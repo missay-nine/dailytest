@@ -1,12 +1,12 @@
-package main
+// package main
 
-import (
-	"dubo/randomapi"
-	"fmt"
-)
+// import (
+// 	"dubo/randomapi"
+// 	"fmt"
+// )
 
-func main() {
+// func main() {
 
-	a, b := randomapi.Randomapi2(10, 228800)
-	fmt.Println(a, b)
-}
+// 	a, b := randomapi.Randomapi2(10, 228800)
+// 	fmt.Println(a, b)
+// }
