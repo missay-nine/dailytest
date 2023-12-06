@@ -19,6 +19,7 @@ func Randapi() (string, int) {
 	// } // 一个存对应字符串 一个存对应和
 	//var log []pair
 	ordNumInt, goldsum, timesum := randomdata()
+	// ordNumInt, goldsum, timesum := 14, 12200, 378423 //自己测试用的
 	ans := jiami(ordNumInt, goldsum, timesum)
 	//	fmt.Println(ans)
 
